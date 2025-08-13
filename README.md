@@ -12,7 +12,7 @@ A Python-based network security scanner that leverages `nmap` and Python's `sock
 
 ## Installation
 ```bash
-git clone https://github.com/<your-username>/basic-vuln-scanner.git
+git clone https://github.com/<KeirPar>/basic-vuln-scanner.git
 cd basic-vuln-scanner
 pip install -r requirements.txt
 ```
