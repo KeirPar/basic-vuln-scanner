@@ -27,7 +27,7 @@ def scan_target(target, ports):
         done = False
         t = threading.Thread(target=spinner_dots, args=(target, ports))
         t.start()
-        nm.scan(hosts=target, ports=ports if ports else '1-1024', arguments='-sV')
+        nm.scan(hosts=target, ports=ports if ports else '1-1024', arguments='-sV -O')  #-sV is used to detect service versions and -O is for opperating system, there are other arguments you can use
         done = True
         t.join()
     except Exception as e:
@@ -43,7 +43,13 @@ def scan_target(target, ports):
             ports = nm[host][proto].keys()
             for port in sorted(ports):
                 service = nm[host][proto][port]
-                print(f"  Port: {port}\tState: {service['state']}\tService: {service['name']} ")
+                if 'osmatch' in nm[host] and nm[host]['osmatch']:
+                    opera = nm[host]['osmatch'][0]
+                else:
+                    print("OS detection not available (need admin privileges or more data).")
+                print(f"  Port: {port}\tState: {service['state']}\tService: {service['name']} \t Opperating System: {opera['name']} Accuracy: {opera['accuracy']}%")  #added for OS detection
+                #added for OS detection
+        
 
 # Main entry point for the scan function
 if __name__ == "__main__":
