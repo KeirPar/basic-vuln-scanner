@@ -56,6 +56,24 @@ The safest way to practice vulnerability scanning is by using intentionally vuln
    python scanner.py 192.168.x.xx --ports 21,22,23,25,80,139,445
    ```
 
+## Screenshots
+
+**Setting up the VirtualBox**
+
+![VM](Screenshots/VM.png)
+
+**Logging into Metasploitable**
+
+![Metasploitable](Screenshots/In_Metasploitable.png)
+
+**Checking ifconfig: Shows your network interface configuration and status information:**
+
+![ifconfig](Screenshots/ifconfig.png)
+
+Testing using Windows PowerShell
+**NOTE: Must run PowerShell as an administrator; otherwise, the VM does not allow you to use nmap to scan it.**
+
+![Powershell](Screenshots/testing.png)
 
 
 ## Security Considerations
