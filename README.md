@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ## Usage
 ```bash
-python scanner.py -t <target_ip> -p <port_range>
+python scanner.py  <target_ip> -p <port_range>
 python scanner.py --help  # For full options
 ```
 
@@ -27,6 +27,42 @@ python scanner.py --help  # For full options
 - Python 3.7+
 - nmap installed and accessible in PATH
 - Required Python packages listed in requirements.txt
+
+## Practicing/Testing
+
+### Legal and Safe Testing Environment
+**IMPORTANT**: Only scan systems you own or have explicit written permission to test. Unauthorized scanning of networks, systems, or services is illegal in most jurisdictions and may violate:
+- Computer Fraud and Abuse Act (CFAA) in the US
+- Computer Misuse Act in the UK  
+- Similar cybersecurity laws worldwide
+
+### Recommended Practice Setup
+
+#### Using Metasploitable for Learning
+The safest way to practice vulnerability scanning is by using intentionally vulnerable systems in an isolated environment:
+
+1. **Download Metasploitable 2**:
+   ```bash
+   # Download from SourceForge or Rapid7
+   wget https://sourceforge.net/projects/metasploitable/files/Metasploitable2/metasploitable-linux-2.0.0.zip
+   ```
+
+2. **VM Setup**:
+   - Install VirtualBox or VMware
+   - Import Metasploitable as a virtual machine
+   - Configure network settings to "Host-Only" or "Internal Network" to isolate from your main network
+   - Default credentials: `msfadmin:msfadmin`
+
+3. **Practice Scenarios**:
+   ```bash
+   # Scan the Metasploitable VM
+   python scanner.py 192.168.x.xx
+   
+   # Target specific vulnerable services
+   python scanner.py 192.168.x.xx --ports 21,22,23,25,80,139,445
+   ```
+
+
 
 ## Security Considerations
 This tool is intended for authorized security testing only. Ensure you have proper permission before scanning any network infrastructure. Unauthorized network scanning may violate local laws and organizational policies.
