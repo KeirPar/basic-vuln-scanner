@@ -57,14 +57,18 @@ The safest way to practice vulnerability scanning is by using intentionally vuln
    ```
 
 ## Screenshots
-Setting up the VirtualBox
+
+**Setting up the VirtualBox**
+
 ![VM](Screenshots/VM.png)
 
-Logging into Metasploitable
-![Metasploitable](Screenshots/in_Metasploitable.png)
+**Logging into Metasploitable**
 
-Testing using Windows Powershell
+![Metasploitable](Screenshots/In_Metasploitable.png)
+
+Testing using Windows PowerShell
 **NOTE: Must run PowerShell as an administrator; otherwise, the VM does not allow you to use nmap to scan it.**
+
 ![Powershell](Screenshots/testing.png)
 
 
