@@ -30,12 +30,6 @@ python scanner.py --help  # For full options
 
 ## Practicing/Testing
 
-### Legal and Safe Testing Environment
-**IMPORTANT**: Only scan systems you own or have explicit written permission to test. Unauthorized scanning of networks, systems, or services is illegal in most jurisdictions and may violate:
-- Computer Fraud and Abuse Act (CFAA) in the US
-- Computer Misuse Act in the UK  
-- Similar cybersecurity laws worldwide
-
 ### Recommended Practice Setup
 
 #### Using Metasploitable for Learning
