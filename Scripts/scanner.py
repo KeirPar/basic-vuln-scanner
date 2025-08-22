@@ -5,7 +5,7 @@ import sys
 import time
 import threading
 
-from spinner import spinner_dots #importing the spinner function
+from Spinner import spinner_dots #importing the spinner function
 
 
 #Main function to scan address(s) and port(s)
