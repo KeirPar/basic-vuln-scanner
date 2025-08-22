@@ -7,7 +7,7 @@ A Python-based network security scanner that leverages `nmap` and Python's `sock
 - IP range scanning for open port discovery
 - Service enumeration and version detection
 - Common misconfiguration identification
-- CVE database integration (planned)
+- CVE database integration 
 - Automated vulnerability assessment reporting
 
 ## Installation
