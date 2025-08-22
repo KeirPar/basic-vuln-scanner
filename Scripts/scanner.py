@@ -55,6 +55,9 @@ def scan_target(target, ports):
                         for line in script_output.split('\n'):
                             if line.strip():
                                 print(f"        {line.strip()}")
+
+
+            
             
         
 
