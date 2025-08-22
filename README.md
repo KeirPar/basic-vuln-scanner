@@ -78,7 +78,7 @@ Testing using Windows PowerShell
 
 **Exporting to txt (can also export to CSV or JSON)**
 
-
+![Exporting](Screenshots/exporting.png)
 
 
 ## Security Considerations
