@@ -46,16 +46,16 @@ def scan_target(target, ports):
             ports = nm[host][proto].keys()
             for port in sorted(ports):
                 service = nm[host][proto][port]
-                print(f"  Port: {port}\tState: {service['state']} \t Service: {service['name']} ")  
+                print(f"  Port: {port}\tState: {service['state']} \t Service: {service['name']} \t Product: {service['product'] }")  
 
                 if 'script' in service: # Check if there are any scripts run
-                    print(f"    Vulnerability scan results:")
+                    print(f"  \n  Vulnerability scan results:")
                     for script_name, script_output in service['script'].items():
                         print(f"      - {script_name}:")
                     # Format the output nicely
                         for line in script_output.split('\n'):
                             if line.strip():
-                                print(f"        {line.strip()}")
+                                print(f"        {line.strip()} \n")
     export_scan_results(nm, target, round(time.time() - timer,2))  # Call the export function
 
             

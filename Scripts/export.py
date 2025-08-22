@@ -5,9 +5,7 @@ import os
 
 #ASKING TO EXPORT RESULTS
 def export_scan_results(nm, target, scan_time):
-    """
-    Asks user if they want to export scan results and handles the export process
-    """
+   # Ask user if they want to export results
     export_choice = input("\n[?] Would you like to export these scan results? (y/n): ").lower().strip()
     
     if export_choice not in ['y', 'yes']:
@@ -36,16 +34,14 @@ def export_scan_results(nm, target, scan_time):
         elif format_choice == "3":
             export_to_txt(nm, target, scan_time, base_filename)
         else:
-            print("[-] Invalid choice, export cancelled")
+            print(" Invalid choice, export cancelled")
     except Exception as e:
-        print(f"[-] Export failed: {e}")
+        print(f" Export failed: {e}")
 
 
 #JSON
 def export_to_json(nm, target, scan_time, base_filename):
-    """Export scan results to JSON format"""
     filename = f"exports/{base_filename}.json"
-    
     scan_data = {
         "scan_info": {
             "target": target,
@@ -94,11 +90,10 @@ def export_to_json(nm, target, scan_time, base_filename):
     with open(filename, 'w') as f:
         json.dump(scan_data, f, indent=2)
     
-    print(f"[+] Exported to JSON: {filename}")
+    print(f" Exported to JSON: {filename}")
 
 #CSV
 def export_to_csv(nm, target, scan_time, base_filename):
-    """Export scan results to CSV format"""
     filename = f"exports/{base_filename}.csv"
     
     with open(filename, 'w', newline='') as csvfile:
@@ -122,11 +117,10 @@ def export_to_csv(nm, target, scan_time, base_filename):
                         'Product': service.get('product', '')
                     })
     
-    print(f"[+] Exported to CSV: {filename}")
+    print(f"Exported to CSV: {filename}")
 
 #BASIC TXT FILE
 def export_to_txt(nm, target, scan_time, base_filename):
-    """Export scan results to human-readable text format"""
     filename = f"exports/{base_filename}.txt"
     
     with open(filename, 'w') as f:
@@ -143,7 +137,7 @@ def export_to_txt(nm, target, scan_time, base_filename):
             f.write(f"Host: {host} ({nm[host].hostname()})\n")
             f.write(f"State: {nm[host].state()}\n")
             
-            # OS Information
+            # OS Information (if available)
             try:
                 if nm[host].get('osmatch') and len(nm[host]['osmatch']) > 0:
                     f.write(f"OS: {nm[host]['osmatch'][0]['name']} (Accuracy: {nm[host]['osmatch'][0]['accuracy']}%)\n")
@@ -161,6 +155,7 @@ def export_to_txt(nm, target, scan_time, base_filename):
                     f.write(f"Port: {port}/{proto}\n")
                     f.write(f"  State: {service['state']}\n")
                     f.write(f"  Service: {service['name']}\n")
+                    #Check to see if version or product information is available
                     if service.get('version'):
                         f.write(f"  Version: {service['version']}\n")
                     if service.get('product'):
@@ -178,4 +173,4 @@ def export_to_txt(nm, target, scan_time, base_filename):
             
             f.write("\n" + "=" * 60 + "\n\n")
     
-    print(f"[+] Exported to TXT: {filename}")
+    print(f"Exported to TXT: {filename}")
