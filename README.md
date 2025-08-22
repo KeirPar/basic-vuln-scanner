@@ -66,6 +66,10 @@ The safest way to practice vulnerability scanning is by using intentionally vuln
 
 ![Metasploitable](Screenshots/In_Metasploitable.png)
 
+**Checking ifconfig: Shows your network interface configuration and status information:**
+
+![ifconfig](Screenshots/ifconfig.png)
+
 Testing using Windows PowerShell
 **NOTE: Must run PowerShell as an administrator; otherwise, the VM does not allow you to use nmap to scan it.**
 
