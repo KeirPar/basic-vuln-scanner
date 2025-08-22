@@ -1,20 +1,11 @@
 #!/usr/bin/env python3
 import nmap
 import argparse
-import time
 import sys
+import time
 import threading
 
-
-#Just for Aesthetic purposes
-def spinner_dots(target,ports):
-    nm = nmap.PortScanner()
-    while not done:
-        # Display a spinner with dots
-        for i in range(4):
-            sys.stdout.write(f"\rScanning {target} for ports: {ports if ports else '1-1024'} {'.'*i}{' '*(3-i)}")
-            sys.stdout.flush()
-            time.sleep(0.3)
+from spinner import spinner_dots #importing the spinner function
 
 
 #Main function to scan address(s) and port(s)
@@ -23,32 +14,48 @@ def scan_target(target, ports):
     nm = nmap.PortScanner()
     try:
         timer = time.time()
-        global done
-        done = False
-        t = threading.Thread(target=spinner_dots, args=(target, ports))
+        stop_event = threading.Event()
+        t = threading.Thread(target=spinner_dots, args=(target, ports, stop_event))
         t.start()
-        nm.scan(hosts=target, ports=ports if ports else '1-1024', arguments='-sV -O')  #-sV is used to detect service versions and -O is for opperating system, there are other arguments you can use
-        done = True
+
+
+        #NOTE: USING -O CAN CAUSE ISSUES WITH SOME SYSTEMS, I HAVE IT REMOVED BECAUSE TO SCAN METASPLOITABLE 2, IT WOULD NOT WORK
+        #ADD -O IF YOU WANT TO TRY TO GET OS INFORMATION
+       
+       #for --scripts, we are only checking for a few common vulnerabilities due to how long it takes to run a full vulnerability scan (vuln)
+        nm.scan(hosts=target, ports=ports if ports else '1-1024', arguments=' -Pn -sT -sV --script ftp-vsftpd-backdoor,ssh-hostkey,http-title,smb-os-discovery')
+
+        stop_event.set()  # Signal the spinner to stop
         t.join()
     except Exception as e:
         print(f"[-] Error: {e}")
         return
     
+
+
     for host in nm.all_hosts():
         print(f"\n\nHost: {host} ({nm[host].hostname()})")
         print(f"State: {nm[host].state().capitalize()}")
         print(f"Scan completed in {time.time() - timer:.2f} seconds\n")
+        #check to see if we were able to get OS information
+        if( 'osmatch' in nm[host]):
+            print(f"OS: {nm[host]['osmatch'][0]['name']} \t Accuracy: {nm[host]['osmatch'][0]['accuracy']}% \n")
         for proto in nm[host].all_protocols():
-            print(f"Protocol: {proto}")
+            print(f"Protocol: {proto} \n" )
             ports = nm[host][proto].keys()
             for port in sorted(ports):
                 service = nm[host][proto][port]
-                if 'osmatch' in nm[host] and nm[host]['osmatch']:
-                    opera = nm[host]['osmatch'][0]
-                else:
-                    print("OS detection not available (need admin privileges or more data).")
-                print(f"  Port: {port}\tState: {service['state']}\tService: {service['name']} \t Opperating System: {opera['name']} Accuracy: {opera['accuracy']}%")  #added for OS detection
-                #added for OS detection
+                print(f"  Port: {port}\tState: {service['state']} \t Service: {service['name']} ")  
+
+                if 'script' in service: # Check if there are any scripts run
+                    print(f"    Vulnerability scan results:")
+                    for script_name, script_output in service['script'].items():
+                        print(f"      - {script_name}:")
+                    # Format the output nicely
+                        for line in script_output.split('\n'):
+                            if line.strip():
+                                print(f"        {line.strip()}")
+            
         
 
 # Main entry point for the scan function
