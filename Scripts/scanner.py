@@ -5,6 +5,7 @@ import sys
 import time
 import threading
 
+from export import  export_scan_results,export_to_csv,export_to_json,export_to_txt  # Importing the export function
 from Spinner import spinner_dots #importing the spinner function
 
 
@@ -55,7 +56,7 @@ def scan_target(target, ports):
                         for line in script_output.split('\n'):
                             if line.strip():
                                 print(f"        {line.strip()}")
-
+    export_scan_results(nm, target, round(time.time() - timer,2))  # Call the export function
 
             
             
