@@ -130,7 +130,6 @@ def export_to_txt(nm, target, scan_time, base_filename):
         f.write(f"Target: {target}\n")
         f.write(f"Scan Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"Scan Duration: {scan_time:.2f} seconds\n")
-        f.write(f"Scanner: Basic Vulnerability Scanner\n")
         f.write("=" * 60 + "\n\n")
         
         for host in nm.all_hosts():
