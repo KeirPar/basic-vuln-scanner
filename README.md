@@ -55,7 +55,10 @@ The safest way to practice vulnerability scanning is by using intentionally vuln
    # Target specific vulnerable services
    python scanner.py 192.168.x.xx --ports 21,22,23,25,80,139,445
    ```
-![Thing](Screenshots/VM.png)
+![VM](Screenshots/VM.png)
+
+
+![Metasploitable](screenshots/in_Metasploitable.png)
 
 
 ## Security Considerations
