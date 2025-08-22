@@ -76,5 +76,10 @@ Testing using Windows PowerShell
 ![Powershell](Screenshots/testing.png)
 
 
+**Exporting to txt (can also export to CSV or JSON)**
+
+![Exporting](Screenshots/exporting.png)
+
+
 ## Security Considerations
 This tool is intended for authorized security testing only. Ensure you have proper permission before scanning any network infrastructure. Unauthorized network scanning may violate local laws and organizational policies.
