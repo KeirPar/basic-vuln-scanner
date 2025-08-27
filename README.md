@@ -1,7 +1,7 @@
 # Basic Vulnerability Scanner
 
 ## Overview
-A Python-based network security scanner that leverages `nmap` and Python's `socket` library to perform comprehensive security assessments. The tool provides automated detection of network vulnerabilities and service misconfigurations.
+A Python-based network security scanner that leverages `nmap` to perform comprehensive security assessments. The tool provides automated detection of network vulnerabilities and service misconfigurations.
 
 ## Features
 - IP range scanning for open port discovery
